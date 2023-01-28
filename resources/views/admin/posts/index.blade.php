@@ -18,12 +18,12 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->excerpt }}</td>
                 <td>
-                    <a href="{{ route('admin.posts.show', ['post' => $post->id]) }}">
+                    <a href="{{ route('admin.posts.show', ['post' => $post]) }}">
                         <button class="btn btn-primary">Leggi</button>
                     </a>
                 </td>
                 <td>
-                    <a href="">
+                    <a href="{{ route('admin.posts.edit', ['post' => $post]) }}">
                         <button class="btn btn-warning">Modifica</button>
                     </a>
                 </td>

@@ -62,7 +62,7 @@
                                 <a class="nav-link active" href="{{ route('admin.dashboard') }}">Dashboard</a>
 
                                 {{-- POST LIST --}}
-                                <a class="nav-link active" href="{{ route('admin.posts.index') }}">Tutti i post</a>
+                                <a class="nav-link active" href="{{ route('admin.posts.index') }}">Editor Post</a>
 
                                 {{-- CREATE POST --}}
                                 <a class="nav-link active" href="{{ route('admin.posts.create') }}">Crea</a>
