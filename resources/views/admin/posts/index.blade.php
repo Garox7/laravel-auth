@@ -28,9 +28,11 @@
                     </a>
                 </td>
                 <td>
-                    <a href="">
+                    <form action="{{ route('admin.posts.destroy', ['post' => $post]) }}" method="post">
+                        @csrf()
+                        @method('DELETE')
                         <button class="btn btn-danger">Elimina</button>
-                    </a>
+                    </form>
                 </td>
             </tr>
             @endforeach
