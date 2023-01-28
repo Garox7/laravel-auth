@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Post;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    private $checkValidation = [
+        'slug' => 'required|string|max:100',
+        'title' => 'required|string|max:100',
+        'image' => 'string|max:100',
+        'content' => 'string',
+        'excerpt' => 'string'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +37,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -40,7 +48,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->checkValidation);
+
+        $data = $request->all();
+
+        $post = new Post();
+        $post->slug = $data['slug'];
+        $post->title = $data['title'];
+        $post->image = $data['image'];
+        $post->content = $data['content'];
+        $post->excerpt = $data['excerpt'];
+        $post->save();
+
+        return redirect()->route('admin.posts.show', ['post' => $post]);
     }
 
     /**
