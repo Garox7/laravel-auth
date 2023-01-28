@@ -23,14 +23,21 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                @guest
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @else
+                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @endguest
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -49,11 +56,24 @@
                                 </li>
                             @endif
                         @else
+
+                            <div class="navbar-nav px-3">
+                                {{-- DASBOARD --}}
+                                <a class="nav-link active" href="{{ route('admin.dashboard') }}">Dashboard</a>
+
+                                {{-- POST LIST --}}
+                                <a class="nav-link active" href="{{ route('admin.posts.index') }}">Tutti i post</a>
+
+                                {{-- CREATE POST --}}
+                                <a class="nav-link active" href="{{ route('admin.posts.create') }}">Crea</a>
+                            </div>
+
+                            {{-- USER BUTTON --}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
+                                {{-- LOGOUT BUTTON  --}}
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
