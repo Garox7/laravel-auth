@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1>{{ $post->title }}</h1>
-        <img src="{{ $post->image }}" alt="" class="figure-img img-fluid rounded mb-4">
+        <img src="{{ asset('storage/' . $post->file_path) }}" alt="{{ $post->title }}" class="img-fluid rounded">
         <p>
             {{ $post->content }}
         </p>

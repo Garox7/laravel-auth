@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('admin.posts.store') }}" class="needs-validation" method="post" novalidate>
+    <form action="{{ route('admin.posts.store') }}" class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
         @csrf()
 
         {{-- TITLE  --}}
@@ -43,6 +43,21 @@
                     <ul>
                         @foreach ($errors->get('image') as $errorMess)
                             <li>{{ $errorMess }}</li>
+                        @endforeach
+                    </ul>
+                @enderror
+            </div>
+        </div>
+
+        {{-- FILE IMAGE  --}}
+        <div class="mb-3">
+            <label for="file_path" class="form-label">Importa file</label>
+            <input type="file" class="form-control @error('file_path') is-invalid @enderror" id="file_path" name="file_path" aria-label="file example" required>
+            <div class="invalid-feedback">
+                @error('file_path')
+                    <ul>
+                        @foreach ($errors->get('file_path') as $error)
+                            <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 @enderror

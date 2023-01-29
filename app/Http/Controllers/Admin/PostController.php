@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     private $checkValidation = [
         'slug' => 'required|string|max:100',
         'title' => 'required|string|max:100',
+        'file_path' => 'image|max:2048',
         'image' => 'string|max:100',
         'content' => 'string',
         'excerpt' => 'string'
@@ -49,12 +51,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->checkValidation);
-
         $data = $request->all();
+
+        $fileImg = Storage::put('uploads', $data['file_path']);
 
         $post = new Post();
         $post->slug = $data['slug'];
         $post->title = $data['title'];
+        $post->file_path = $fileImg;
         $post->image = $data['image'];
         $post->content = $data['content'];
         $post->excerpt = $data['excerpt'];
@@ -95,11 +99,14 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate($this->checkValidation);
-
         $data = $request->all();
+
+        $fileImg = Storage::put('uploads', $data['file_path']);
+        Storage::delete($post->file_path);
 
         $post->slug = $data['slug'];
         $post->title = $data['title'];
+        $post->file_path = $fileImg;
         $post->image = $data['image'];
         $post->content = $data['content'];
         $post->excerpt = $data['excerpt'];
