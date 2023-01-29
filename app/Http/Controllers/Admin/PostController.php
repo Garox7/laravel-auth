@@ -64,7 +64,7 @@ class PostController extends Controller
         $post->excerpt = $data['excerpt'];
         $post->save();
 
-        return redirect()->route('admin.posts.show', ['post' => $post]);
+        return redirect()->route('admin.posts.show', ['post' => $post])->with('success_created', $post);
     }
 
     /**
@@ -112,7 +112,7 @@ class PostController extends Controller
         $post->excerpt = $data['excerpt'];
         $post->update();
 
-        return redirect()->route('admin.posts.show', ['post' => $post]);
+        return redirect()->route('admin.posts.show', ['post' => $post])->with('success_updated', $post);
     }
 
     /**
@@ -124,6 +124,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('success_deleted', $post);
     }
 }
