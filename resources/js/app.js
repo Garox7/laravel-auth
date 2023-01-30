@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./partials/admin-sidebar');
 
 window.Vue = require('vue');
 

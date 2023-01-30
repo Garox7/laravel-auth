@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.dashboard', compact('user'));
+        $posts = Post::all();
+        return view('admin.dashboard', compact('user'), [
+            'posts' => $posts,
+        ]);
     }
 }

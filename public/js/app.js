@@ -5049,7 +5049,7 @@ module.exports = {
  */
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-__webpack_require__(/*! ./partials/header */ "./resources/js/partials/header.js");
+__webpack_require__(/*! ./partials/admin-sidebar */ "./resources/js/partials/admin-sidebar.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.runtime.common.js");
 
 /**
@@ -5113,13 +5113,32 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/partials/header.js":
-/*!*****************************************!*\
-  !*** ./resources/js/partials/header.js ***!
-  \*****************************************/
+/***/ "./resources/js/partials/admin-sidebar.js":
+/*!************************************************!*\
+  !*** ./resources/js/partials/admin-sidebar.js ***!
+  \************************************************/
 /***/ (() => {
 
-
+var body = document.querySelector('body');
+sidebar = body.querySelector('.admin-sidebar');
+toggle = body.querySelector('.toggle');
+searchBtn = body.querySelector('.search-box');
+modeSwitch = body.querySelector('.toggle-switch');
+modeText = body.querySelector('.mode-text');
+toggle.addEventListener('click', function () {
+  sidebar.classList.toggle('close');
+});
+searchBtn.addEventListener('click', function () {
+  sidebar.classList.remove('close');
+});
+modeSwitch.addEventListener('click', function () {
+  body.classList.toggle('dark');
+  if (body.classList.contains('dark')) {
+    modeText.innerHTML = 'Light Mode';
+  } else {
+    modeText.innerHTML = 'Dark Mode';
+  }
+});
 
 /***/ }),
 
